@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-my @files=('CHANGES', 'roffit', 'roffit.1');
+my @files=('CHANGES', 'roffit', 'roffit.1', 'LICENSE', 'Makefile');
 
 my $version=$ARGV[0];
 

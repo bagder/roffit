@@ -1,4 +1,17 @@
-* (Jan 2, 2005)
+* 2007-08-10
+- Imported the project files to the new CVS repository on sourceforge
+- Added some files
+- Added 'make install' support for easier/faster deployment
+
+* 2007-07-31
+- double backslashes should not be cleared entirely
+- add $id$
+
+* 2006-01-23
+- remove carriage returns and show line numbers of unknown keywords to ease
+  debugging of this script
+
+* (Jan 2, 2006)
 - Steve Benson made roffit translate all '\-' sequenes to just '-'.
 
 * (April 5, 2005)
