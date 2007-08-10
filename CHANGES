@@ -1,0 +1,56 @@
+* (Jan 2, 2005)
+- Steve Benson made roffit translate all '\-' sequenes to just '-'.
+
+* (April 5, 2005)
+- Make a bare .BR do a "<br>"
+- Make .pp start a new paragraph
+- Ignore the weird '\" comment latex2man adds
+- Ignore de, ft and "..". I *believe* they are use to set a "macro".
+
+* (March 15, 2005)
+- Added comments about .nf and .fi based on
+  http://www.rfc-editor.org/nroff.html
+
+* (June 21, 2004)
+- make .fi properly end a .nf section
+
+* (April 12, 2004)
+- convert <> properly within the .BR data as well
+
+* (March 5, 2004)
+- make links for ftp:// as well
+- strip \& completely instead of making "&zerosp;" (which isn't good html)
+
+0.6 (February 27, 2004)
+ - added --mandir and --hrefdir
+ - made it convert http:// URLs to <a href> links
+ - added --version
+
+0.5 (February 3, 2004)
+ - Added support for more &-combos
+ - Better treatment of .nf to make <pre> sections, and we now do newlines
+   better within such a <pre> section
+ - .IR is now treated equally as .I
+ - keywords and their data can be tab-separated
+ - .SS is now treated as .SH
+
+0.4 (December 5, 2003)
+ - Andrew Dixon filed a bug report with a man page generated with the
+   help2man tool. roffit now deals with \fR as well as \fP as an end
+   marker for special word formatting.
+ - I moved the changelog into this file
+ - Wrote a first basic man page for roffit
+
+0.3 (November 14, 2003)
+ Daniel Fandrich brought:
+ - deals with .lp lines
+ - .TH needs no section portion anymore
+ - added generator meta tag in the header
+
+0.2 (November 7, 2003)
+ - fixed the <a name> name for the SH section
+ - added <a href> links from all words within \fIthis\fP or \fBthis\fP
+   that has the same text as a .SH or .IP.
+
+0.1 (November 5, 2003)
+ - Initial public release

@@ -1,0 +1,58 @@
+.\" You can view this file with:
+.\" nroff -man roffit.1
+.\" Written by Daniel Stenberg
+.\"
+.TH roffit 1 "27 Feb 2004" "roffit 0.6" "roffit Manual"
+.SH NAME
+roffit \- convert nroff to HTML
+.SH SYNOPSIS
+.B roffit [options] < inputfile > outputfile
+.SH DESCRIPTION
+.B roffit
+converts the \fIinputfile\fP to \fIoutputfile\fP. The \fIinputfile\fP must be
+an nroff formatted man page, and the \fIoutputfile\fP will be an HTML
+document.
+.SH OPTIONS
+.IP --bare
+The output HTML will not include any HTML, HEAD or BODY tags. Also not that
+when this is selected, there will be no inlined CSS but you will have to
+define the necessary classes yourself.
+.IP --version
+Display version number and exit
+.IP --mandir=<dir>
+Set a directory in which \fIroffit\fP will check for other man pages (in nroff
+[name].[num] format) that this one refers to. If found, a <a href> link will
+be made to that page with a html extension instead of the number. The file
+name in the generated link will be prefixed by the dir given with
+\fI--hrefdir\fP.
+
+This works for references specified as \fImanpage(3)\fP (within the emhpasis
+foformatting) and in a plain \.BR section (often used in the SEE ALSO
+section).
+.IP --hrefdir=<dir>
+Specify a directory to prefix generated href links created with the --mandir
+option. This defaults to ".".
+.SH "CSS CLASSES"
+.IP h2.nroffsh
+The nroff ".SH" section. These are normally the "headlines" before each sub
+section within the man page.
+.IP p.nroffip
+The nroff ".IP" section. These are normally the bullet kind used to list each
+option out of several in a list. Usually followed by a \fIp.level0\fP
+containining the descriptive text.
+.IP p.level0
+Normal text at the first level. Normally not indented.
+.IP p.level1
+Text at next logical indent level. Normally indented one level right.
+.IP p.level2
+Text at the second logical indent level. Normally indented two levels right.
+.IP span.bold
+Text marked to be bold.
+.IP span.manpage
+Text marked as a reference to another man page.
+.IP span.emphasis
+Text marked to be emphasized.
+.IP p.roffit
+Used for the advertising final paragraph.
+.SH WWW
+http://daniel.haxx.se/projects/roffit
