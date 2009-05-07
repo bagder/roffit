@@ -7,7 +7,7 @@
 # This is a very simple script, but I use it on very simple man pages as I've
 # found no decent script that makes really nice web pages.
 #
-# $Id: roffit,v 1.1 2007/08/10 10:40:22 bagder Exp $
+# $Id: roffit,v 1.2 2009/05/07 09:28:18 bagder Exp $
 #
 my $version = "0.7";
 # Author:  Daniel Stenberg <daniel@haxx.se>
@@ -208,7 +208,7 @@ sub parsefile {
             if($keyword eq "\\\"") {
                 # this is a comment, skip this line
             }
-            elsif($keyword =~ /^TH$/i) {
+            elsif($keyword =~ /^TH$/) {
                 # man page header:
                 # curl 1 "22 Oct 2003" "Curl 7.10.8" "Curl Manual"
                 # NAME SECTION DATE VERSION MANUAL
@@ -221,7 +221,7 @@ sub parsefile {
                     $manpage{'manual'} = $6;
                 }
             }
-            elsif($keyword =~ /^S[HS]$/i) {
+            elsif($keyword =~ /^S[HS]$/) {
                 # SS is treated the same as SH
                 # Section Header
                 showp(@p);
@@ -241,7 +241,7 @@ sub parsefile {
                 $indentlevel=0;
                 $within_tp=0;
             }
-            elsif(($keyword =~ /^B$/i) || ($keyword =~ /^BI$/i)) {
+            elsif(($keyword =~ /^B$/) || ($keyword =~ /^BI$/)) {
                 # Make B and BI the same for simplicity
                 $rest =~ s/\"//g; # cut off quotes
                 $rest =~ s/</&lt;/g;
@@ -257,26 +257,26 @@ sub parsefile {
                     push @p, "\n";
                 }
             }
-            elsif(($keyword =~ /^I$/i) || ($keyword =~ /^IR$/i)) {
+            elsif(($keyword =~ /^I$/) || ($keyword =~ /^IR$/)) {
                 $rest =~ s/\"//g; # cut off quotes
                 $rest =~ s/</&lt;/g;
                 $rest =~ s/>/&gt;/g;
                 push @p, "<span class=\"emphasis\">$rest</span> ";
             }
-            elsif($keyword =~ /^RS$/i) {
+            elsif($keyword =~ /^RS$/) {
                 # the start of another indent-level. for inlined tables
                 # within an "IP"
                 showp(@p);
                 @p="";
                 $indentlevel++;
             }
-            elsif($keyword =~ /^RE$/i) {
+            elsif($keyword =~ /^RE$/) {
                 # end of the RS section
                 showp(@p);
                 @p="";
                 $indentlevel--;
             }
-            elsif($keyword =~ /^NF$/i) {
+            elsif($keyword =~ /^NF$/) {
                 # We let nf start a <pre> section .nf = no-fill, you use for
                 # graphs or text that you don't want spaces to be ignored
 
@@ -285,7 +285,7 @@ sub parsefile {
                 push @out, "<pre>\n";
                 $pre=1
             }
-            elsif($keyword =~ /^TP$/i) {
+            elsif($keyword =~ /^TP$/) {
                 # Used within an "RS" section to make a new line. The first
                 # TP as a column indicator, but we decide to do that
                 # controlling in the CSS instead.
@@ -293,7 +293,7 @@ sub parsefile {
                 showp(@p);
                 @p="";                
             }
-            elsif($keyword =~ /^IP$/i) {
+            elsif($keyword =~ /^IP$/) {
                 # start of a new paragraph coming up
                 showp(@p);
                 @p="";
@@ -313,27 +313,27 @@ sub parsefile {
                 $indentlevel++;
                 $within_tp=0;
             }
-            elsif($keyword =~ /^ad$/i) {
+            elsif($keyword =~ /^ad$/) {
                 showp(@p);
                 @p="";
             }
-            elsif($keyword =~ /^sp$/i) {
+            elsif($keyword =~ /^sp$/) {
                 showp(@p);
                 @p="";
             }
-            elsif($keyword =~ /^lp$/i) {
+            elsif($keyword =~ /^lp$/) {
                 # marks end of a paragraph
                 showp(@p);
                 @p="";
             }
-            elsif($keyword =~ /^pp$/i) {
+            elsif($keyword =~ /^pp$/) {
                 # PP ends a TP section, but some TP sections don't use it
                 # Often used to separate paragraphs
                 $within_tp=0;
                 showp(@p);
                 @p="";
             }
-            elsif($keyword =~ /^fi$/i) {
+            elsif($keyword =~ /^fi$/) {
                 # .fi = fill-in, extra space will be ignored and text that is
                 # entered like this, the fill-in command will continue until
                 # you enter a .nf command and vice-versa
@@ -347,16 +347,16 @@ sub parsefile {
                 }
 
             }
-            elsif($keyword =~ /^(de|ft|\.)$/i) {
+            elsif($keyword =~ /^(de|ft|\.)$/) {
                 # no idea what these do!
             }
-            elsif($keyword =~ /^so$/i) {
+            elsif($keyword =~ /^so$/) {
                 # This keyword refers to a different man page, named in the
                 # $rest.
                 # We don't support this
                 push @out, "See the $rest man page.\n";
             }
-            elsif($keyword =~ /^BR$/i) {
+            elsif($keyword =~ /^BR$/) {
                 # I'm not sure what this does exactly, but this is commonly
                 # used to include pointers to other man pages. Let's assume
                 # it only does that for now.
