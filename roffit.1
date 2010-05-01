@@ -13,24 +13,24 @@ converts the \fIinputfile\fP to \fIoutputfile\fP. The \fIinputfile\fP must be
 an nroff formatted man page, and the \fIoutputfile\fP will be an HTML
 document.
 .SH OPTIONS
-.IP --bare
+.IP \-\-bare
 The output HTML will not include any HTML, HEAD or BODY tags. Also not that
 when this is selected, there will be no inlined CSS but you will have to
 define the necessary classes yourself.
-.IP --version
+.IP \-\-version
 Display version number and exit
-.IP --mandir=<dir>
+.IP \-\-mandir=<dir>
 Set a directory in which \fIroffit\fP will check for other man pages (in nroff
 [name].[num] format) that this one refers to. If found, a <a href> link will
 be made to that page with a html extension instead of the number. The file
 name in the generated link will be prefixed by the dir given with
-\fI--hrefdir\fP.
+\fI\-\-hrefdir\fP.
 
 This works for references specified as \fImanpage(3)\fP (within the emhpasis
 foformatting) and in a plain \.BR section (often used in the SEE ALSO
 section).
-.IP --hrefdir=<dir>
-Specify a directory to prefix generated href links created with the --mandir
+.IP \-\-hrefdir=<dir>
+Specify a directory to prefix generated href links created with the \-\-mandir
 option. This defaults to ".".
 .SH "CSS CLASSES"
 .IP h2.nroffsh
