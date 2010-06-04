@@ -1,0 +1,15 @@
+NAME
+
+    roffit
+
+DESCRIPTION
+
+    A tool that reads nroff and outputs HTML
+
+AUTHORS
+
+    Daniel Stenberg <daniel@haxx.se>
+
+LICENSE
+
+    MIT
