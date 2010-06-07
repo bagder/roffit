@@ -176,6 +176,33 @@ sub linkfile {
     return @new;
 }
 
+sub handle_italic_bold ($) {
+    local $_ = shift;
+
+    while ( m,^(.*?)(\\f[IB].*?\\fR)(.*), ) {
+	my ($before, $match, $after) = ($1, $2, $3);
+
+	my $counter = 0;
+
+	while ( $match =~ s/\\fI/<span class=\"emphasis\">/ ) {
+	    $counter++;
+	}
+
+	while ( $match =~ s/\\fB/<span class=\"bold\">/ ) {
+	    $counter++;
+	}
+
+	my $tag = '</span>';
+	my $end = $tag x $counter;
+
+	$match =~ s/\\f[PR]/$end/;
+
+	$_ = $before . $match . $after;
+    }
+
+    $_;
+}
+
 sub parsefile {
     my $lineno;
     while(<$InFH>) {
@@ -442,9 +469,8 @@ sub parsefile {
             $txt =~ s/\\ /&nbsp\;/g;
             $txt =~ s/\\\'/&acute\;/g;
             $txt =~ s/\\\(co/&copy\;/g;
-            $txt =~ s/\\fI/<span class=\"emphasis\">/g;
-            $txt =~ s/\\fB/<span class=\"bold\">/g;
-            $txt =~ s/\\f[PR]/<\/span>/g;
+
+	    $_ = handle_italic_bold $_;
 
             # replace backslash [something] with just [something]
             $txt =~ s/\\(.)/$1/g;
