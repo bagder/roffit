@@ -7,12 +7,10 @@
 # This is a very simple script, but I use it on very simple man pages as I've
 # found no decent script that makes really nice web pages.
 #
-# $Id: roffit,v 1.2 2009/05/07 09:28:18 bagder Exp $
-#
-my $version = "0.7";
 # Author:  Daniel Stenberg <daniel@haxx.se>
-# Please mail me improvements.
-#
+# Web:     http://daniel.haxx.se/projects/roffit
+
+my $version = "0.8";
 
 use strict;
 #use warnings;
@@ -139,9 +137,6 @@ sub linkfile {
             
             $l = text2name($name);
 
-            #printf $debugFH "$style - $name - %s - %d\n",
-            #$l, $anchor{$l};
-
             my $link;
             if($anchor{$l}) {
                 $link="<a class=\"$style\" href=\"#$l\">$name</a>";
@@ -183,7 +178,7 @@ sub linkfile {
 sub handle_italic_bold ($) {
     local $_ = shift;
 
-    while ( m,^(.*?)(\\f[IB].*?\\fR)(.*), ) {
+    while ( m,^(.*?)(\\f[IB].*?\\f[RP])(.*), ) {
 	my ($before, $match, $after) = ($1, $2, $3);
 
 	my $counter = 0;
@@ -468,13 +463,14 @@ sub parsefile {
 
             $txt =~ s/</&lt\;/g;
             $txt =~ s/>/&gt\;/g;
+
+	    $txt = handle_italic_bold $txt;
+
             $txt =~ s/\\&//g;
             $txt =~ s/\\-/-/g;
             $txt =~ s/\\ /&nbsp\;/g;
             $txt =~ s/\\\'/&acute\;/g;
             $txt =~ s/\\\(co/&copy\;/g;
-
-	    $_ = handle_italic_bold $_;
 
             # replace backslash [something] with just [something]
             $txt =~ s/\\(.)/$1/g;
