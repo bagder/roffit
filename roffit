@@ -171,6 +171,10 @@ sub linkfile {
         }
         # convert lowercase ftp:// or http:// links to <a href> links
         $line =~ s/((http|ftp):\/\/([a-z0-9.\/_%-]*[a-z\/]))/<a href=\"$2:\/\/$3\">$1<\/a>/g;
+
+        # convert (uppercase only) "RFC [number]" to a link
+        $line =~ s/RFC *(\d+)/<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$1.txt\">RFC $1<\/a>/;
+
         push @new, $line;
     }
     return @new;
