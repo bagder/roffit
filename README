@@ -6,6 +6,15 @@ DESCRIPTION
 
     A tool that reads nroff and outputs HTML
 
+HOME
+
+    Project home: http://daniel.haxx.se/projects/roffit
+    Source code: https://github.com/bagder/roffit
+
+    Get the code:
+
+        git clone git://github.com/bagder/roffit.git
+
 AUTHORS
 
     Daniel Stenberg <daniel@haxx.se>
