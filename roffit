@@ -515,14 +515,14 @@ if($standalone) {
  "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
 <title>$title</title>
-<meta name="generator" content="roffit $version">
+<meta name="generator" content="roffit">
 MOO
     ;
     defaultcss();
     print "</head><body>\n";
 }
 else {
-    print "<!-- generated with roffit $version -->\n";
+    print "<!-- generated with roffit -->\n";
 }
 
 print $OutFH @conv;
