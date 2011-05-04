@@ -176,30 +176,11 @@ sub linkfile {
 }
 
 sub handle_italic_bold ($) {
-    local $_ = shift;
-
-    while ( m,^(.*?)(\\f[IB].*?\\f[RP])(.*), ) {
-	my ($before, $match, $after) = ($1, $2, $3);
-
-	my $counter = 0;
-
-	while ( $match =~ s/\\fI/<span class=\"emphasis\">/ ) {
-	    $counter++;
-	}
-
-	while ( $match =~ s/\\fB/<span class=\"bold\">/ ) {
-	    $counter++;
-	}
-
-	my $tag = '</span>';
-	my $end = $tag x $counter;
-
-	$match =~ s/\\f[PR]/$end/;
-
-	$_ = $before . $match . $after;
-    }
-
-    $_;
+    my $_ = shift;
+    $_ =~ s/\\fI/<span class=\"emphasis\">/g;
+    $_ =~ s/\\fB/<span class=\"bold\">/g;
+    $_ =~ s/\\f[PR]/<\/span>/g;
+    return $_;
 }
 
 sub parsefile {
