@@ -176,7 +176,7 @@ sub linkfile {
 }
 
 sub handle_italic_bold ($) {
-    my $_ = shift;
+    $_ = shift;
     $_ =~ s/\\fI/<span class=\"emphasis\">/g;
     $_ =~ s/\\fB/<span class=\"bold\">/g;
     $_ =~ s/\\f[PR]/<\/span>/g;
@@ -236,7 +236,7 @@ sub parsefile {
                 # NAME SECTION DATE VERSION MANUAL
 		# section can be: 1 or 3C
 
-                if ( $rest =~ /(\S+)\s+\"?(\d\S?+)\"?\s+\"([^\"]*)\" \"([^\"]*)\"(\"([^\"]*)\")?/ ) {
+                if ( $rest =~ /(\S+)\s+\"?(\d+\S?)\"?\s+\"([^\"]*)\" \"([^\"]*)\"(\"([^\"]*)\")?/ ) {
                     # strict matching only so far
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
@@ -245,7 +245,7 @@ sub parsefile {
                     $manpage{'manual'}  = $6;
                 }
 	        # .TH html2text 1 2008-09-20 HH:MM:SS
-		elsif ( $rest =~  m, (\S+) \s+ \"?(\d\S?+)\"? \s+ \"?([ \d:/-]+)\"? \s* (.*) ,x )
+		elsif ( $rest =~  m, (\S+) \s+ \"?(\d+\S?)\"? \s+ \"?([ \d:/-]+)\"? \s* (.*) ,x )
 		{
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
@@ -253,14 +253,14 @@ sub parsefile {
                     $manpage{'manual'}  = $4;
 		}
 		# .TH program 1 description
-		elsif ( $rest =~ /(\S+) \s+ \"?(\d\S?+)\"? \s+ (.+)/x )
+		elsif ( $rest =~ /(\S+) \s+ \"?(\d+\S?)\"? \s+ (.+)/x )
 		{
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
                     $manpage{'manual'}  = $3;
 		}
 		# .TH program 1
-		elsif ( $rest =~ /(\S+) \s+ \"?(\d\S?+)\"? /x )
+		elsif ( $rest =~ /(\S+) \s+ \"?(\d+\S?)\"? /x )
 		{
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
