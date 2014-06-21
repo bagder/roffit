@@ -159,7 +159,7 @@ sub linkfile {
                             my $html = "$hrefdir/$symbol.html";
                             # there is such a HTML file present, produce a link
                             # to it!
-                            $link="<a class=\"$style\" href=\"$html\">$symbol</a>";
+                            $link="<a Class=\"$style\" href=\"$html\">$symbol</a>";
                             last; # skip out of loop
                         }
                     }
