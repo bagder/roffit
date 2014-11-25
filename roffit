@@ -10,7 +10,7 @@
 # Author:  Daniel Stenberg <daniel@haxx.se>
 # Web:     http://daniel.haxx.se/projects/roffit
 
-my $version = "0.9";
+my $version = "0.10";
 
 use strict;
 #use warnings;
@@ -428,13 +428,24 @@ sub parsefile {
                 else {
                     my @all = split /,/, $rest;
                     for(@all) {
+                        my $link = "<span class=\"manpage\">$_</span> ";
                         if(/([^ ]*) *\((\d+)\)/) {
-                            # TODO: this looks like a man page, check if
-                            # there's a HTML file for it and if so make a link
-                            # to it
+                            my ($symbol, $section)=($1, $2);
+
+                            for my $d (@mandirs) {
+                                my $file = "$d/$symbol.$section";
+
+                                if(-r $file) {
+                                    my $html = "$hrefdir/$symbol.html";
+                                    # there is such a HTML file present, produce a link
+                                    # to it!
+                                    $link="<a Class=\"manpage\" href=\"$html\">$symbol</a>, ";
+                                    last; # skip out of loop
+                                }
+                            }
                         }
                         
-                        push @p, "<span class=\"manpage\">$_</span> ";
+                        push @p, $link;
                     }
                 }
             }
