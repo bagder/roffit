@@ -145,7 +145,7 @@ sub linkfile {
                 $link="<a class=\"$style\" href=\"#$l\">$name</a>";
             }
             else {
-                if(($name =~ /^ *(\w*) *\( *(\d*) *\) *$/) && ($mandir)) {
+                if(($name =~ /^ *([a-z_0-9-]*) *\( *(\d*) *\) *$/) && ($mandir)) {
 
                     # this looks like a reference to another man page, and we
                     # have asked for this feature! We check for the specified
