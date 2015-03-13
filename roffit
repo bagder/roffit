@@ -71,22 +71,22 @@ while($ARGV[0]) {
 
 sub showp {
     my @p = @_;
-    push @out, "\n" if(!$pre);
-    push @out, "<p class=\"level$indentlevel\">", @p;
+    push @out, "\n<p class=\"level$indentlevel\">" if(!$pre);
+    push @out, @p;
 }
 
 sub defaultcss {
     print $OutFH <<ENDOFCSS
 <STYLE type="text/css">
-P.level0 {
+P.level0, pre.level0 {
  padding-left: 2em;
 }
 
-P.level1 {
+P.level1, pre.level1 {
  padding-left: 4em;
 }
 
-P.level2 {
+P.level2, pre.level2 {
  padding-left: 6em;
 }
 
@@ -333,7 +333,7 @@ sub parsefile {
 
                 showp(@p);
                 @p="";
-                push @out, "<pre>\n";
+                push @out, "<pre class=\"level$indentlevel\">\n";
                 $pre=1
             }
             elsif($keyword =~ /^TP$/i) {
