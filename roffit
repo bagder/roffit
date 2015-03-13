@@ -78,6 +78,12 @@ sub showp {
 sub defaultcss {
     print $OutFH <<ENDOFCSS
 <STYLE type="text/css">
+pre {
+  overflow: auto;
+  border: 1px solid #aaa;
+  margin: 0;
+}
+
 P.level0, pre.level0 {
  padding-left: 2em;
 }
