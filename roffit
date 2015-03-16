@@ -80,7 +80,6 @@ sub defaultcss {
 <STYLE type="text/css">
 pre {
   overflow: auto;
-  border: 1px solid #aaa;
   margin: 0;
 }
 
