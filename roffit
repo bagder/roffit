@@ -466,6 +466,7 @@ sub parsefile {
 
             $txt =~ s/</&lt\;/g;
             $txt =~ s/>/&gt\;/g;
+            $txt =~ s/\#/&#35;/g; # to avoid clean '#' like before if/define/include
 
 	    $txt = handle_italic_bold $txt;
 
