@@ -486,6 +486,7 @@ sub parsefile {
             }
             else {
                 $txt =~ s/^ /\&nbsp\;/g;
+                $txt =~ s/^\n/\&nbsp\;\n/ if($pre);
                 push @p, "$txt";
                 push @p, " " if(!$pre);
             }
