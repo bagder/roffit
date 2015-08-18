@@ -175,8 +175,8 @@ sub linkfile {
             }
             $line =~ s/\[\]/$link/;
         }
-        # convert ftp:// or http:// links to <a href> links
-        $line =~ s/((http|ftp):\/\/([a-z0-9.\/_%\#-]*[a-z\/]))/<a href=\"$2:\/\/$3\">$1<\/a>/gi;
+        # convert https://, http:// and ftp:// URLs to <a href> links
+        $line =~ s/((https|http|ftp):\/\/([a-z0-9.\/_%\#-]*[a-z\/]))/<a href=\"$2:\/\/$3\">$1<\/a>/gi;
 
         # convert (uppercase only) "RFC [number]" to a link
         $line =~ s/RFC *(\d+)/<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$1.txt\">RFC $1<\/a>/;
