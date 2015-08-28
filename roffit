@@ -69,6 +69,8 @@ while($ARGV[0]) {
     }
 }
 
+sub strlen($) { defined($_[0]) ? length($_[0]) : 0; }
+
 sub showp {
     my @p = @_;
     push @out, "\n<p class=\"level$indentlevel\">" if(!$pre);
@@ -134,54 +136,93 @@ sub text2name {
 }
 
 # scan through the file and check for <span> sections we should convert
-# to proper links
+# to proper links. ignore preformatted text.
 sub linkfile {
+    my $preformatted;
     my @new;
     for(@out) {
-        my $line=$_;
-        my $l;
-        while($line =~ s/<span class=\"(manpage|emphasis|bold)\">([^<]*)<\/span>/[]/) {
-            my ($style, $name)=($1, $2);
-            
-            $l = text2name($name);
-
-            my $link;
-            if($anchor{$l}) {
-                $link="<a class=\"$style\" href=\"#$l\">$name</a>";
+        my $remaining = $_;
+        my $processed = "";
+        while(strlen($remaining)) {
+            my $field;
+            my $tail;
+            $remaining =~ /(?:(.*?)(<\/?pre.*?>))?(.*)/s;
+            # $1 is anything before the first encountered pre tag
+            # $2 is that pre tag (starts with <pre or </pre)
+            # $3 is anything remaining
+            if(strlen($2)) {
+                $remaining = (strlen($3) ? $3 : ""); # for the next iteration
+                $preformatted = ("<pre" eq substr($2, 0, 4));
+                if(!strlen($1) || !$preformatted) {
+                    # $1 is empty or preformatted (eg foo</pre>bar)
+                    $processed .= (strlen($1) ? $1 : "") . $2;
+                    next;
+                }
+                # $1 is not empty and not preformatted
+                $field = $1;
+                $tail = $2;
             }
             else {
-                if(($name =~ /^ *([A-Za-z_0-9-]*) *\( *(\d*) *\) *$/) && ($mandir)) {
+                # $2 is empty which means $1 is empty and $3 contains no pre
+                # we can process the remaining part of the line all at once
+                $remaining = "";
+                if(!strlen($3) || $preformatted) {
+                    # $3 is empty or preformatted from previous tag
+                    $processed .= (strlen($3) ? $3 : "");
+                    last;
+                }
+                # $3 is not empty and not preformatted
+                $field = $3;
+                $tail = "";
+            }
 
-                    # this looks like a reference to another man page, and we
-                    # have asked for this feature! We check for the specified
-                    # nroff file and not the HTML version, to avoid depending
-                    # on which order the set of files are converted to HTML!
-                    my ($symbol, $section)=($1, $2);
-                    for my $d (@mandirs) {
-                        my $file = "$d/$symbol.$section";
+            while($field =~ s/<span class=\"(manpage|emphasis|bold)\">([^<]*)<\/span>/[]/) {
+                my ($style, $name)=($1, $2);
 
-                        if(-r $file) {
-                            my $html = "$hrefdir/$symbol.html";
-                            # there is such a HTML file present, produce a link
-                            # to it!
-                            $link="<a Class=\"$style\" href=\"$html\">$symbol</a>";
-                            last; # skip out of loop
+                my $l = text2name($name);
+
+                my $link;
+                if($anchor{$l}) {
+                    $link="<a class=\"$style\" href=\"#$l\">$name</a>";
+                }
+                else {
+                    if(($mandir) &&
+                       ($name =~ /^ *([A-Za-z_0-9-]*) *\( *(\d*) *\) *$/)) {
+
+                        # this looks like a reference to another man page, and
+                        # we have asked for this feature! We check for the
+                        # specified nroff file and not the HTML version, to
+                        # avoid depending on which order the set of files are
+                        # converted to HTML!
+                        my ($symbol, $section)=($1, $2);
+                        for my $d (@mandirs) {
+                            my $file = "$d/$symbol.$section";
+
+                            if(-r $file) {
+                                my $html = "$hrefdir/$symbol.html";
+                                # there is such a HTML file present, produce a
+                                # link to it!
+                                $link = "<a Class=\"$style\" href=\"$html\">$symbol</a>";
+                                last; # skip out of loop
+                            }
                         }
                     }
+                    if(!$link) {
+                        $link = "<span Class=\"$style\">$name</span>";
+                    }
                 }
-                if(!$link) {
-                    $link="<span Class=\"$style\">$name</span>";
-                }
+                $field =~ s/\[\]/$link/;
             }
-            $line =~ s/\[\]/$link/;
+
+            # convert https://, http:// and ftp:// URLs to <a href> links
+            $field =~ s/(^|[\"\s])((?:https|http|ftp):\/\/[a-z0-9\-._~%:\/?\#\[\]\@!\$&'()*+,;=]+)/$1<a href=\"$2\">$2<\/a>/gi;
+
+            # convert (uppercase only) "RFC [number]" to a link
+            $field =~ s/(^|[\"\s])RFC ?(\d+)/$1<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$2.txt\">RFC $2<\/a>/g;
+
+            $processed .= $field . $tail;
         }
-        # convert https://, http:// and ftp:// URLs to <a href> links
-        $line =~ s/(^|[\"\s])((?:https|http|ftp):\/\/[a-z0-9\-._~%:\/?\#\[\]\@!\$&'()*+,;=]+)/$1<a href=\"$2\">$2<\/a>/gi;
-
-        # convert (uppercase only) "RFC [number]" to a link
-        $line =~ s/(^|[\"\s])RFC ?(\d+)/$1<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$2.txt\">RFC $2<\/a>/g;
-
-        push @new, $line;
+        push @new, $processed;
     }
     return @new;
 }
