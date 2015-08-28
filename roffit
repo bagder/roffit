@@ -176,10 +176,10 @@ sub linkfile {
             $line =~ s/\[\]/$link/;
         }
         # convert https://, http:// and ftp:// URLs to <a href> links
-        $line =~ s/((https|http|ftp):\/\/([a-z0-9.\/_%\#-]*[a-z\/]))/<a href=\"$2:\/\/$3\">$1<\/a>/gi;
+        $line =~ s/(^|[\"\s])((?:https|http|ftp):\/\/[a-z0-9\-._~%:\/?\#\[\]\@!\$&'()*+,;=]+)/$1<a href=\"$2\">$2<\/a>/gi;
 
         # convert (uppercase only) "RFC [number]" to a link
-        $line =~ s/RFC *(\d+)/<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$1.txt\">RFC $1<\/a>/;
+        $line =~ s/(^|[\"\s])RFC ?(\d+)/$1<a href=\"http:\/\/www.ietf.org\/rfc\/rfc$2.txt\">RFC $2<\/a>/g;
 
         push @new, $line;
     }
