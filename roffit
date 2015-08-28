@@ -273,22 +273,22 @@ sub parsefile {
                 # man page header:
                 # curl 1 "22 Oct 2003" "Curl 7.10.8" "Curl Manual"
 
-		# Treat pages that have "*(Dt":
-		# .TH IDENT 1 \*(Dt GNU
+                # Treat pages that have "*(Dt":
+                # .TH IDENT 1 \*(Dt GNU
 
-		$rest =~ s,\Q\\*(Dt,,g;
+                $rest =~ s,\Q\\*(Dt,,g;
 
-		# Delete backslashes
+                # Delete backslashes
 
-		$rest =~ s,\\,,g;
+                $rest =~ s,\\,,g;
 
-		# Delete old RCS tags
-		# .TH saidar 1 $Date:\ 2006/11/30\ 23:42:42\ $ i\-scream
+                # Delete old RCS tags
+                # .TH saidar 1 $Date:\ 2006/11/30\ 23:42:42\ $ i\-scream
 
-		$rest =~ s,\$Date:\s+(.*?)\s+\$,$1,g;
+                $rest =~ s,\$Date:\s+(.*?)\s+\$,$1,g;
 
                 # NAME SECTION DATE VERSION MANUAL
-		# section can be: 1 or 3C
+                # section can be: 1 or 3C
 
                 if ( $rest =~ /(\S+)\s+\"?(\d+\S?)\"?\s+\"([^\"]*)\" \"([^\"]*)\"(\"([^\"]*)\")?/ ) {
                     # strict matching only so far
@@ -298,27 +298,27 @@ sub parsefile {
                     $manpage{'version'} = $4;
                     $manpage{'manual'}  = $6;
                 }
-	        # .TH html2text 1 2008-09-20 HH:MM:SS
-		elsif ( $rest =~  m, (\S+) \s+ \"?(\d+\S?)\"? \s+ \"?([ \d:/-]+)\"? \s* (.*) ,x )
-		{
+                # .TH html2text 1 2008-09-20 HH:MM:SS
+                elsif ( $rest =~  m, (\S+) \s+ \"?(\d+\S?)\"? \s+ \"?([ \d:/-]+)\"? \s* (.*) ,x )
+                {
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
                     $manpage{'date'}    = $3;
                     $manpage{'manual'}  = $4;
-		}
-		# .TH program 1 description
-		elsif ( $rest =~ /(\S+) \s+ \"?(\d+\S?)\"? \s+ (.+)/x )
-		{
+                }
+                # .TH program 1 description
+                elsif ( $rest =~ /(\S+) \s+ \"?(\d+\S?)\"? \s+ (.+)/x )
+                {
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
                     $manpage{'manual'}  = $3;
-		}
-		# .TH program 1
-		elsif ( $rest =~ /(\S+) \s+ \"?(\d+\S?)\"? /x )
-		{
+                }
+                # .TH program 1
+                elsif ( $rest =~ /(\S+) \s+ \"?(\d+\S?)\"? /x )
+                {
                     $manpage{'name'}    = $1;
                     $manpage{'section'} = $2;
-		}
+                }
             }
             elsif($keyword =~ /^S[HS]$/i) {
                 # SS is treated the same as SH
@@ -522,7 +522,7 @@ sub parsefile {
             $txt =~ s/>/&gt\;/g;
             $txt =~ s/\#/&#35;/g; # to avoid clean '#' like before if/define/include
 
-	    $txt = handle_italic_bold $txt;
+            $txt = handle_italic_bold $txt;
 
             $txt =~ s/\\&//g;
             $txt =~ s/\\-/-/g;
