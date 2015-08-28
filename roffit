@@ -196,10 +196,12 @@ sub handle_italic_bold ($) {
 
 sub parsefile {
     my $lineno;
+    my $br_lastp;
     while(<$InFH>) {
         $lineno++;
         my $in = $_;
         my $out;
+
   #     print $debugFH "DEBUG IN: $_";
 
         $in =~ s/[\r\n]//g if(!$pre); # tear off newlines
@@ -424,6 +426,8 @@ sub parsefile {
                 $rest =~ s/\"//g; # cut off quotes
                 $rest =~ s/</&lt;/g;
                 $rest =~ s/>/&gt;/g;
+                $rest =~ s/^\s+//;
+                $rest =~ s/\s+$//;
 
                 if(!$rest) {
                     # A stand-alone .br will become a line break
@@ -431,9 +435,9 @@ sub parsefile {
                     push @p, "<br>";
                 }
                 else {
-                    my @all = split /,/, $rest;
+                    my @all = split /\s*,\s*/, $rest;
                     for(@all) {
-                        my $link = "<span class=\"manpage\">$_</span> ";
+                        my $link = "<span class=\"manpage\">$_</span>";
                         if(/([^ ]*) *\((\d+)\)/) {
                             my ($symbol, $section)=($1, $2);
 
@@ -444,13 +448,22 @@ sub parsefile {
                                     my $html = "$hrefdir/$symbol.html";
                                     # there is such a HTML file present, produce a link
                                     # to it!
-                                    $link="<a Class=\"manpage\" href=\"$html\">$symbol</a>, ";
+                                    $link = "<a Class=\"manpage\" href=\"$html\">$symbol</a>";
                                     last; # skip out of loop
                                 }
                             }
                         }
-                        
+
+                        # if we're continuing an existing list use a comma
+                        # .BR foo (or .BR foo,)
+                        # .BR bar
+                        # will render as foo, bar
+                        if($br_lastp && @p == $br_lastp) {
+                            $link = ", " . $link;
+                        }
+
                         push @p, $link;
+                        $br_lastp = @p;
                     }
                 }
             }
