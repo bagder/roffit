@@ -10,7 +10,7 @@
 # Author:  Daniel Stenberg <daniel@haxx.se>
 # Web:     https://daniel.haxx.se/projects/roffit
 
-my $version = "0.10";
+my $version = "0.11";
 
 use strict;
 #use warnings;
