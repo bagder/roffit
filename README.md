@@ -1,6 +1,6 @@
-# Description
+# roff
 
-A tool that reads nroff and outputs HTML
+A command line tool that reads nroff and outputs HTML
 
 ## Home
 
@@ -12,10 +12,10 @@ A tool that reads nroff and outputs HTML
 
  git clone git://github.com/bagder/roffit.git
 
-Authors
+## Contributors
 
  Daniel Stenberg, Jay Satiro, Jari Aalto
 
-License
+## License
 
  MIT
