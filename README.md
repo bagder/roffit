@@ -1,4 +1,4 @@
-# roff
+# roffit
 
 A command line tool that reads nroff and outputs HTML
 
