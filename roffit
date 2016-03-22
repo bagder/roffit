@@ -8,7 +8,7 @@
 # found no decent script that makes really nice web pages.
 #
 # Author:  Daniel Stenberg <daniel@haxx.se>
-# Web:     http://daniel.haxx.se/projects/roffit
+# Web:     https://daniel.haxx.se/projects/roffit
 
 my $version = "0.10";
 
@@ -32,6 +32,7 @@ my %anchor; # hash with all anchors
 my @mandirs;
 my $mandir;
 my $hrefdir=".";
+my $filename;
 
 while($ARGV[0]) {
     if($ARGV[0] eq "--bare") {
@@ -40,7 +41,7 @@ while($ARGV[0]) {
         shift @ARGV;
     }
     elsif($ARGV[0] eq "--version") {
-        print "roffit $version (http://daniel.haxx.se/projects/roffit/)\n";
+        print "roffit $version (https://daniel.haxx.se/projects/roffit/)\n";
         exit;
     }
     elsif($ARGV[0] =~ /^--mandir=(.*)/) {
@@ -56,9 +57,8 @@ while($ARGV[0]) {
         $hrefdir=$1;
         shift @ARGV;
     }
-    else {
-        printf $debugFH "unknown option: %s\n", $ARGV[0] if($ARGV[0] ne "-h");
-        print $debugFH "Usage: roffit [options] < infile > outfile\n",
+    elsif($ARGV[0] =~ /^(--help|-h)/) {
+        print $debugFH "Usage: roffit [options] [infile] < infile > outfile\n",
         "Options:\n",
         " --version       display roffit version and exit\n",
         " --bare          do not put in HTML, HEAD, BODY tags\n",
@@ -66,6 +66,10 @@ while($ARGV[0]) {
         " --hrefdir=<dir> if a manpage is found in the --mandir, this is the\n",
         "                 dir we prefix the HTML file name with in the output\n";
         exit;
+    }
+    else {
+        $filename=$ARGV[0];
+        last;
     }
 }
 
@@ -236,6 +240,7 @@ sub handle_italic_bold ($) {
 }
 
 sub parsefile {
+    my ($filename)=@_;
     my $lineno;
     my $br_lastp;
     while(<$InFH>) {
@@ -511,7 +516,8 @@ sub parsefile {
             else {
                 showp(@p);
                 @p="";
-                print $debugFH "ALERT: unknown keyword \"$keyword\" on line $lineno\n";
+                printf $debugFH "Error: unknown keyword \"$keyword\" on %s:$lineno\n",
+                $filename?$filename:"<unknown>";
             }
         }
         else {
@@ -558,7 +564,12 @@ sub parsefile {
     showp(@p);
 }
 
-parsefile();
+if($filename) {
+    # if specified, otherwise stick with stdin
+    open($InFH, "<".$filename);
+}
+
+parsefile($filename);
 
 my @conv = linkfile();
 
