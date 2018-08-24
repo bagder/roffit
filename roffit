@@ -513,6 +513,9 @@ sub parsefile {
                     }
                 }
             }
+            elsif ($keyword =~ /^ti/i) {
+                push @p, "&nbsp;&nbsp;&nbsp;&nbsp;";
+            }
             else {
                 showp(@p);
                 @p="";
