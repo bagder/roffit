@@ -191,14 +191,14 @@ sub linkfile {
                 }
                 else {
                     if(($mandir) &&
-                       ($name =~ /^ *([A-Za-z_0-9-]*) *\( *(\d*) *\) *$/)) {
+                       ($name =~ /^ *([A-Za-z_0-9-]*) *\( *(\d+[A-Za-z]*) *\) *$/)) {
 
                         # this looks like a reference to another man page, and
                         # we have asked for this feature! We check for the
                         # specified nroff file and not the HTML version, to
                         # avoid depending on which order the set of files are
                         # converted to HTML!
-                        my ($symbol, $section)=($1, $2);
+                        my ($symbol, $section)=($1, lc $2);
                         for my $d (@mandirs) {
                             my $file = "$d/$symbol.$section";
 
@@ -484,8 +484,8 @@ sub parsefile {
                     my @all = split /\s*,\s*/, $rest;
                     for(@all) {
                         my $link = "<span class=\"manpage\">$_</span>";
-                        if(/([^ ]*) *\((\d+)\)/) {
-                            my ($symbol, $section)=($1, $2);
+                        if(/([A-Za-z_0-9-]*) *\( *(\d+[A-Za-z]*) *\)/) {
+                            my ($symbol, $section)=($1, lc $2);
 
                             for my $d (@mandirs) {
                                 my $file = "$d/$symbol.$section";
