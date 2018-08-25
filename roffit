@@ -14,6 +14,7 @@ my $version = "0.12";
 
 use strict;
 #use warnings;
+use HTML::Entities qw(encode_entities);
 
 my $InFH = \*STDIN;
 my $OutFH = \*STDOUT;
@@ -339,8 +340,7 @@ sub parsefile {
                 $anchor{$name}=1;
 
                 $rest =~ s/\"//g; # cut off quotes
-                $rest =~ s/</&lt;/g;
-                $rest =~ s/>/&gt;/g;
+                $rest = encode_entities($rest);
                 $out = "<a name=\"$name\"></a><h2 class=\"nroffsh\">$rest</h2>";
                 $indentlevel=0;
                 $within_tp=0;
@@ -348,8 +348,7 @@ sub parsefile {
             elsif(($keyword =~ /^B$/i) || ($keyword =~ /^BI$/i)) {
                 # Make B and BI the same for simplicity
                 $rest =~ s/\"//g; # cut off quotes
-                $rest =~ s/</&lt;/g;
-                $rest =~ s/>/&gt;/g;
+                $rest = encode_entities($rest);
 
                 # This is pretty lame, but since a .B section and itself
                 # contain a \fI[blabla]\fP section, we cut off all the \f
@@ -363,8 +362,7 @@ sub parsefile {
             }
             elsif(($keyword =~ /^I$/i) || ($keyword =~ /^IR$/i)) {
                 $rest =~ s/\"//g; # cut off quotes
-                $rest =~ s/</&lt;/g;
-                $rest =~ s/>/&gt;/g;
+                $rest = encode_entities($rest);
                 push @p, "<span class=\"emphasis\">$rest</span> ";
             }
             elsif($keyword =~ /^RS$/i) {
@@ -406,8 +404,7 @@ sub parsefile {
                 $anchor{$name}=1;
 
                 $rest =~ s/\"//g; # cut off quotes
-                $rest =~ s/</&lt;/g;
-                $rest =~ s/>/&gt;/g;
+                $rest = encode_entities($rest);
                 
                 $indentlevel-- if ($indentlevel);
                 push @p, "<a name=\"$name\"></a><span class=\"nroffip\">$rest</span> ";
@@ -470,8 +467,7 @@ sub parsefile {
                 # etc
                 
                 $rest =~ s/\"//g; # cut off quotes
-                $rest =~ s/</&lt;/g;
-                $rest =~ s/>/&gt;/g;
+                $rest = encode_entities($rest);
                 $rest =~ s/^\s+//;
                 $rest =~ s/\s+$//;
 
@@ -527,13 +523,13 @@ sub parsefile {
             # text line, decode \-stuff
             my $txt = $in;
 
-            $txt =~ s/</&lt\;/g;
-            $txt =~ s/>/&gt\;/g;
             $txt =~ s/\#/&#35;/g; # to avoid clean '#' like before if/define/include
 
             $txt = handle_italic_bold $txt;
 
             $txt =~ s/\\&//g;
+	    # Must come after previous substitution or it could munge some entities.
+	    $txt = encode_entities($txt);
             $txt =~ s/\\-/-/g;
             $txt =~ s/\\ /&nbsp\;/g;
             $txt =~ s/\\\'/&acute\;/g;
