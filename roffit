@@ -194,24 +194,34 @@ sub linkfile {
                     $link="<a class=\"$style\" href=\"#$l\">$name</a>";
                 }
                 else {
-                    if(($mandir) &&
-                       ($name =~ /^ *([A-Za-z_0-9-]*) *\( *(\d+[A-Za-z]*) *\) *$/)) {
+                    if($mandir) {
+                        my ($symbol, $section);
+                        if ($name =~ /^ *([A-Za-z_0-9-]*) *\( *(\d+[A-Za-z]*) *\) *$/) {
 
-                        # this looks like a reference to another man page, and
-                        # we have asked for this feature! We check for the
-                        # specified nroff file and not the HTML version, to
-                        # avoid depending on which order the set of files are
-                        # converted to HTML!
-                        my ($symbol, $section)=($1, lc $2);
-                        for my $d (@mandirs) {
-                            my $file = "$d/$symbol.$section";
+                            # this looks like a reference to another man page, and
+                            # we have asked for this feature! We check for the
+                            # specified nroff file and not the HTML version, to
+                            # avoid depending on which order the set of files are
+                            # converted to HTML!
+                            ($symbol, $section)=($1, lc $2);
+                        }
+                        elsif ($field =~ /\[\] *\( *(\d+[A-Za-z]*) *\)/) {
+                            # Also look for references where the man page
+                            # section is outside the span.
+                            $section = lc $1;
+                            ($symbol) = ($name =~ /^ *([A-Za-z_0-9-]+)/);
+                        }
+                        if ($symbol && $section) {
+                            for my $d (@mandirs) {
+                                my $file = "$d/$symbol.$section";
 
-                            if(-r $file) {
-                                my $html = "$hrefdir/$symbol.html";
-                                # there is such a HTML file present, produce a
-                                # link to it!
-                                $link = "<a Class=\"$style\" href=\"$html\">$symbol</a>";
-                                last; # skip out of loop
+                                if(-r $file) {
+                                    my $html = "$hrefdir/$symbol.html";
+                                    # there is such a HTML file present, produce a
+                                    # link to it!
+                                    $link = "<a Class=\"$style\" href=\"$html\">$symbol</a>";
+                                    last; # skip out of loop
+                                }
                             }
                         }
                     }
