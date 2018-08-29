@@ -388,8 +388,7 @@ sub parsefile {
                 $indentlevel=0;
                 $within_tp=0;
             }
-            elsif(($keyword =~ /^B$/i) || ($keyword =~ /^BI$/i)) {
-                # Make B and BI the same for simplicity
+            elsif($keyword =~ /^B$/i) {
                 $rest =~ s/\"//g; # cut off quotes
                 $rest = do_encode($rest);
 
@@ -403,7 +402,7 @@ sub parsefile {
                     push @p, "\n";
                 }
             }
-            elsif(($keyword =~ /^I$/i) || ($keyword =~ /^IR$/i)) {
+            elsif($keyword =~ /^I$/i) {
                 $rest =~ s/\"//g; # cut off quotes
                 $rest = do_encode($rest);
                 push @p, "<span class=\"emphasis\">$rest</span> ";
@@ -500,16 +499,14 @@ sub parsefile {
                 # We don't support this
                 push @out, "See the $rest man page.\n";
             }
+	    elsif($keyword eq "br") {
+                push @p, "<br>";
+	    }
             elsif($keyword =~ /^([RIB])([RIB])$/) {
                 # Alternating font faces
                 my @ff = ($1, $2);
 
-                if(!$rest) {
-                    # A stand-alone .br will become a line break
-                    #print $debugFH "ALERT: bare BR\n";
-                    push @p, "<br>";
-                }
-                else {
+                if($rest) {
                     my @all = split_quoted($rest);
                     my $fi = 0;
                     my @applied;
