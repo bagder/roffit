@@ -523,13 +523,12 @@ sub parsefile {
             # text line, decode \-stuff
             my $txt = $in;
 
-            $txt =~ s/\#/&#35;/g; # to avoid clean '#' like before if/define/include
-
             $txt = handle_italic_bold $txt;
 
             $txt =~ s/\\&//g;
 	    # Must come after previous substitution or it could munge some entities.
 	    $txt = encode_entities($txt);
+            $txt =~ s/\#/&#35;/g; # to avoid clean '#' like before if/define/include
             $txt =~ s/\\-/-/g;
             $txt =~ s/\\ /&nbsp\;/g;
             $txt =~ s/\\\'/&acute\;/g;
