@@ -407,6 +407,7 @@ sub parsefile {
                 $anchor{$name}=1;
 
                 $rest =~ s/\"//g; # cut off quotes
+		$rest =~ s/\\f[IBPR]//g; # Un-format it (Use CSS on nroffip class instead)
                 $rest = do_encode($rest);
                 
                 $indentlevel-- if ($indentlevel);
