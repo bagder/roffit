@@ -387,8 +387,11 @@ sub parsefile {
 
                 showp(@p);
                 @p="";
-                push @out, "<pre class=\"level$indentlevel\">\n";
-                $pre=1
+                if (!$pre) {
+                    # avoid nesting pre sections
+                    push @out, "<pre class=\"level$indentlevel\">\n";
+                    $pre=1
+                }
             }
             elsif($keyword =~ /^TP$/i) {
                 # Used within an "RS" section to make a new line. The first
