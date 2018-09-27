@@ -515,7 +515,7 @@ sub parsefile {
                     my $fi = 0;
                     my @applied;
                     for(@all) {
-                        my $encoded = encode_entities($_);
+                        my $encoded = do_encode($_);
                         push @applied, $apply_face{$ff[$fi]}->($encoded);
                         $fi = $fi ? 0 : 1;
                     }
