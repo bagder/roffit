@@ -526,8 +526,6 @@ sub parsefile {
             # text line, decode \-stuff
             my $txt = $in;
 
-            $txt = handle_italic_bold $txt;
-
             $txt =~ s/\\&//g;
 	    # Must come after previous substitution or it could munge some entities.
 	    $txt = do_encode($txt);
@@ -535,6 +533,8 @@ sub parsefile {
             $txt =~ s/\\ /&nbsp\;/g;
             $txt =~ s/\\(?:'|&#39;)/&acute\;/g;
             $txt =~ s/\\\(co/&copy\;/g;
+
+            $txt = handle_italic_bold $txt;
 
             # replace backslash [something] with just [something]
             $txt =~ s/\\(.)/$1/g;
