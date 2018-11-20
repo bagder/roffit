@@ -256,7 +256,7 @@ sub parsefile {
 
         $in =~ s/[\r\n]//g if(!$pre); # tear off newlines
 
-        $in =~ s/\r//g; # remote carriage return always
+        $in =~ s/\r//g; # remove carriage return always
 
         # substitue all '\-' sequences with '-'.
         # '\-' might be in the source file to specify a literal
