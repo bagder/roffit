@@ -93,11 +93,26 @@ pre {
   margin: 0;
 }
 
+body {
+ font-family: sans;
+ font-size: 100%;
+ background-color: #deddda;
+}
+
+a {
+ color: #1a5fb4;
+ font-weight: bold;
+ text-decoration: none;
+}
+
 P.level0, pre.level0 {
- padding-left: 2em;
+ line-height: 120%;
+ margin-top: 0.6em;
+ padding-left: 1em;
 }
 
 P.level1, pre.level1 {
+ margin-top: 0.6em;
  padding-left: 4em;
 }
 
@@ -118,7 +133,10 @@ span.manpage {
 }
 
 h2.nroffsh {
- background-color: #e0e0e0;
+ color: #ffffff;
+ font-size: 120%;
+ padding-left: 0.5em;
+ background-color: #555753;
 }
 
 span.nroffip {
@@ -584,7 +602,7 @@ parsefile($filename);
 
 my @conv = linkfile();
 
-my $title=sprintf("%s man page",
+my $title=sprintf("%s manual",
                   $manpage{'name'}?$manpage{'name'}:"secret");
 
 if($standalone) {
@@ -598,18 +616,9 @@ MOO
     ;
     defaultcss();
     print "</head><body>\n";
-}
-else {
-    print "<!-- generated with roffit -->\n";
+    print "</body></html>\n";
+    print "</body></html>\n";
 }
 
 print $OutFH @conv;
-print $OutFH <<ROFFIT
-<p class="roffit">
- This HTML page was made with <a href="http://daniel.haxx.se/projects/roffit/">roffit</a>.
-ROFFIT
-    ;
 
-if($standalone) {
-    print "</body></html>\n";
-}
