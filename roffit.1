@@ -2,7 +2,7 @@
 .\" nroff -man roffit.1
 .\" Written by Daniel Stenberg
 .\"
-.TH roffit 1 "27 Feb 2004" "roffit 0.6" "roffit Manual"
+.TH roffit 1 "October 5 2021" "roffit 0.13" "roffit Manual"
 .SH NAME
 roffit \- convert nroff to HTML
 .SH SYNOPSIS
@@ -32,6 +32,10 @@ section).
 .IP \-\-hrefdir=<dir>
 Specify a directory to prefix generated href links created with the \-\-mandir
 option. This defaults to ".".
+.IP \-\-preserve-case
+When used, this makes roffit preserve the case in SH (section header) in the
+output instead of uppercasing the first letter and doing the rest lowercase.
+The case changing was introduced in roffit 0.13.
 .SH "CSS CLASSES"
 .IP h2.nroffsh
 The nroff ".SH" section. These are normally the "headlines" before each sub
