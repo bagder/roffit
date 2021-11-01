@@ -552,6 +552,9 @@ sub parsefile {
             $txt =~ s/\\ /&nbsp\;/g;
             $txt =~ s/\\(?:'|&#39;)/&acute\;/g;
             $txt =~ s/\\\(co/&copy\;/g;
+            $txt =~ s/\\\(aq/&apos\;/g;
+            $txt =~ s/\\\(cq/&apos\;/g;
+            $txt =~ s/\\\(dq/&quot\;/g;
 
             $txt = handle_italic_bold $txt;
 
