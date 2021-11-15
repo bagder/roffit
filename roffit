@@ -556,11 +556,16 @@ sub parsefile {
             $txt =~ s/\\\(cq/&apos\;/g;
             $txt =~ s/\\\(dq/&quot\;/g;
 
+            # \e is the "escape character", defaults to backslash
+            $txt =~ s/\\e/&bsol;/g;
+
             $txt = handle_italic_bold $txt;
 
             # replace backslash [something] with just [something]
             $txt =~ s/\\(.)/$1/g;
 
+            # convert remaining backslashes to &bsol;
+            $txt =~ s/\\/&bsol\;/g;
             if(($txt =~ /^[ \t\r\n]*$/) && (!$pre)) {
                 # no contents, marks end of a paragraph
                 showp(@p);
