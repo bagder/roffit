@@ -561,6 +561,8 @@ sub parsefile {
             # replace backslash [something] with just [something]
             $txt =~ s/\\(.)/$1/g;
 
+            # convert remaining backslashes to &bsol;
+            $txt =~ s/\\/&bsol\;/g;
             if(($txt =~ /^[ \t\r\n]*$/) && (!$pre)) {
                 # no contents, marks end of a paragraph
                 showp(@p);
