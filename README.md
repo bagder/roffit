@@ -14,7 +14,8 @@ A command line tool that reads nroff and outputs HTML
 
 ## Contributors
 
- Daniel Stenberg, Jay Satiro, Jari Aalto
+ Daniel Stenberg, Jay Satiro, Jari Aalto, Daniel Miller, René Nyffenegger,
+ Sumit Roy
 
 ## License
 
