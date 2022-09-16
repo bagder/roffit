@@ -2,7 +2,7 @@
 
 <p class="level0"><a name="NAME"></a><h2 class="nroffsh">Name</h2>
 <p class="level0">testpage - test input nroff man page for roffit testing <a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
-<p class="level0"><span Class="bold">roffit [options] &lt; inputfile &gt; outputfile</span> <a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><span Class="bold">roffit</span> [<span Class="emphasis">options</span>] &lt; inputfile &gt; outputfile <a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
 <p class="level0"><span Class="bold">roffit</span> converts the <span Class="emphasis">inputfile</span> to <span Class="emphasis">outputfile</span>. The <span Class="emphasis">inputfile</span> must be an nroff formatted man page, and the <span Class="emphasis">outputfile</span> will be an HTML document. 
 <p class="level0"><a href="http://www.ietf.org/rfc/rfc959.txt">RFC 959</a> is FTP 
 <p class="level0"><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a> is URI syntax 
