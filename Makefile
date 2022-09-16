@@ -12,4 +12,6 @@ test:
 	  echo "SUCCESS"; \
 	else \
 	  echo "FAIL"; \
+	  diff -u testpage.output testpage.dump; \
+	  exit 1; \
 	fi
