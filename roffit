@@ -559,6 +559,9 @@ sub parsefile {
             # \e is the "escape character", defaults to backslash
             $txt =~ s/\\e/&bsol;/g;
 
+            # \/ and \, are "italic corrections" that we can just remove
+            $txt =~ s/\\[,\/]//g;
+
             $txt = handle_italic_bold $txt;
 
             # replace backslash [something] with just [something]
