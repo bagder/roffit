@@ -1,0 +1,19 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: roffit
+Upstream-Contact: Daniel Stenberg <daniel@haxx.se>
+Source: https://curl.se
+
+# Tests
+Files: testpage.1 testpage.output
+Copyright: Daniel Stenberg, <daniel@haxx.se>, et al.
+License: curl
+
+# Docs
+Files: README.md CHANGES
+Copyright: Daniel Stenberg, <daniel@haxx.se>, et al.
+License: curl
+
+# Meta
+Files: .gitignore
+Copyright: Daniel Stenberg, <daniel@haxx.se>, et al.
+License: curl
