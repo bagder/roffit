@@ -4,7 +4,8 @@
 <p class="level0">testpage - test input nroff man page for roffit testing <a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
 <p class="level0"><span Class="bold">roffit</span> [<span Class="emphasis">options</span>] &lt; inputfile &gt; outputfile <a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
 <p class="level0"><span Class="bold">roffit</span> converts the <span Class="emphasis">inputfile</span> to <span Class="emphasis">outputfile</span>. The <span Class="emphasis">inputfile</span> must be an nroff formatted man page, and the <span Class="emphasis">outputfile</span> will be an HTML document. 
-<p class="level0"><a href="http://www.ietf.org/rfc/rfc959.txt">RFC 959</a> is FTP 
+<p class="level0">(<a href="http://www.ietf.org/rfc/rfc959.txt">RFC 959</a>) is FTP 
+<p class="level0">but ARFC 959 is a fake 
 <p class="level0"><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a> is URI syntax 
 <p class="level0">Also, we must support <span class="emphasis">style staring on one line and ending on another that may</span> be multiple lines off. <a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
 <p class="level0">
