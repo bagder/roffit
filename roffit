@@ -99,8 +99,11 @@ sub strlen($) { defined($_[0]) ? length($_[0]) : 0; }
 
 sub showp {
     my @p = @_;
-    push @out, "\n<p class=\"level$indentlevel\">" if(!$pre);
-    push @out, @p;
+    if(@p && join("", @p)) {
+        push @out, "\n<p class=\"level$indentlevel\">" if(!$pre);
+        push @out, @p;
+        push @out, "</p>" if(!$pre);
+    }
 }
 
 sub defaultcss {
