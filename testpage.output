@@ -1,43 +1,40 @@
 <!-- generated with roffit -->
-
-<p class="level0"><a name="NAME"></a><h2 class="nroffsh">Name</h2>
-<p class="level0">testpage - test input nroff man page for roffit testing <a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
-<p class="level0"><span Class="bold">roffit</span> [<span Class="emphasis">options</span>] &lt; inputfile &gt; outputfile <a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
-<p class="level0"><span Class="bold">roffit</span> converts the <span Class="emphasis">inputfile</span> to <span Class="emphasis">outputfile</span>. The <span Class="emphasis">inputfile</span> must be an nroff formatted man page, and the <span Class="emphasis">outputfile</span> will be an HTML document. 
-<p class="level0">(<a href="http://www.ietf.org/rfc/rfc959.txt">RFC 959</a>) is FTP 
-<p class="level0">but ARFC 959 is a fake 
-<p class="level0"><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a> is URI syntax 
-<p class="level0">Also, we must support <span class="emphasis">style staring on one line and ending on another that may</span> be multiple lines off. <a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
-<p class="level0">
-<p class="level0"><a name="--bare"></a><span class="nroffip">--bare</span> 
-<p class="level1">The output HTML will not include any HTML, HEAD or BODY tags. Also not that when this is selected, there will be no inlined CSS but you will have to define the necessary classes yourself. 
-<p class="level0"><a name="--mumbo"></a><span class="nroffip">--mumbo</span> 
-<p class="level1">Display version number and exit. Also see <a class="bold" href="#--jumbo">--jumbo</a>. Word in bold. 
-<p class="level0"><a name="--jumbo"></a><span class="nroffip">--jumbo</span> 
-<p class="level1">Cool option. See <a class="emphasis" href="#--mumbo">--mumbo</a>. Word in italic. 
-<p class="level0"><a name="--mandirdir"></a><span class="nroffip">--mandir=&lt;dir&gt;</span> 
-<p class="level1">Set a directory in which <span Class="emphasis">roffit</span> will check for other man pages (in nroff [name].[num] format) that this one refers to. If found, a &lt;a href&gt; link will be made to that page with a html extension instead of the number. The file name in the generated link will be prefixed by the dir given with <span Class="emphasis">--hrefdir</span>. 
-<p class="level1">This works for references specified as <span Class="emphasis">manpage(3)</span> (within the emhpasis foformatting) and in a plain .BR section (often used in the SEE ALSO section). 
-<p class="level0"><a name="--hrefdirdir"></a><span class="nroffip">--hrefdir=&lt;dir&gt;</span> 
-<p class="level1">Specify a directory to prefix generated href links created with the --mandir option. This defaults to &quot;.&quot;. <a name="CSS"></a><h2 class="nroffsh">Css classes</h2>
-<p class="level0">
-<p class="level0"><a name="h2nroffsh"></a><span class="nroffip">h2.nroffsh</span> 
-<p class="level1">The nroff &quot;.SH&quot; section. These are normally the &quot;headlines&quot; before each sub section within the man page. 
-<p class="level0"><a name="pnroffip"></a><span class="nroffip">p.nroffip</span> 
-<p class="level1">The nroff &quot;.IP&quot; section. These are normally the bullet kind used to list each option out of several in a list. Usually followed by a <a class="emphasis" href="#plevel0">p.level0</a> containining the descriptive text. 
-<p class="level0"><a name="plevel0"></a><span class="nroffip">p.level0</span> 
-<p class="level1">Normal text at the first level. Normally not indented. 
-<p class="level0"><a name="plevel1"></a><span class="nroffip">p.level1</span> 
-<p class="level1">Text at next logical indent level. Normally indented one level right. 
-<p class="level0"><a name="plevel2"></a><span class="nroffip">p.level2</span> 
-<p class="level1">Text at the second logical indent level. Normally indented two levels right. 
-<p class="level0"><a name="spanbold"></a><span class="nroffip">span.bold</span> 
-<p class="level1">Text marked to be bold. 
-<p class="level0"><a name="spanmanpage"></a><span class="nroffip">span.manpage</span> 
-<p class="level1">Text marked as a reference to another man page. 
-<p class="level0"><a name="spanemphasis"></a><span class="nroffip">span.emphasis</span> 
-<p class="level1">Text marked to be emphasized. 
-<p class="level0"><a name="proffit"></a><span class="nroffip">p.roffit</span> 
-<p class="level1">Used for the advertising final paragraph. <a name="WWW"></a><h2 class="nroffsh">Www</h2>
-<p class="level0"><a href="http://daniel.haxx.se/projects/roffit">http://daniel.haxx.se/projects/roffit</a> <p class="roffit">
+<a name="NAME"></a><h2 class="nroffsh">Name</h2>
+<p class="level0">testpage - test input nroff man page for roffit testing </p><a name="SYNOPSIS"></a><h2 class="nroffsh">Synopsis</h2>
+<p class="level0"><span Class="bold">roffit</span> [<span Class="emphasis">options</span>] &lt; inputfile &gt; outputfile </p><a name="DESCRIPTION"></a><h2 class="nroffsh">Description</h2>
+<p class="level0"><span Class="bold">roffit</span> converts the <span Class="emphasis">inputfile</span> to <span Class="emphasis">outputfile</span>. The <span Class="emphasis">inputfile</span> must be an nroff formatted man page, and the <span Class="emphasis">outputfile</span> will be an HTML document. </p>
+<p class="level0">(<a href="http://www.ietf.org/rfc/rfc959.txt">RFC 959</a>) is FTP </p>
+<p class="level0">but ARFC 959 is a fake </p>
+<p class="level0"><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a> is URI syntax </p>
+<p class="level0">Also, we must support <span class="emphasis">style staring on one line and ending on another that may</span> be multiple lines off. </p><a name="OPTIONS"></a><h2 class="nroffsh">Options</h2>
+<p class="level0"><a name="--bare"></a><span class="nroffip">--bare</span> </p>
+<p class="level1">The output HTML will not include any HTML, HEAD or BODY tags. Also not that when this is selected, there will be no inlined CSS but you will have to define the necessary classes yourself. </p>
+<p class="level0"><a name="--mumbo"></a><span class="nroffip">--mumbo</span> </p>
+<p class="level1">Display version number and exit. Also see <a class="bold" href="#--jumbo">--jumbo</a>. Word in bold. </p>
+<p class="level0"><a name="--jumbo"></a><span class="nroffip">--jumbo</span> </p>
+<p class="level1">Cool option. See <a class="emphasis" href="#--mumbo">--mumbo</a>. Word in italic. </p>
+<p class="level0"><a name="--mandirdir"></a><span class="nroffip">--mandir=&lt;dir&gt;</span> </p>
+<p class="level1">Set a directory in which <span Class="emphasis">roffit</span> will check for other man pages (in nroff [name].[num] format) that this one refers to. If found, a &lt;a href&gt; link will be made to that page with a html extension instead of the number. The file name in the generated link will be prefixed by the dir given with <span Class="emphasis">--hrefdir</span>. </p>
+<p class="level1">This works for references specified as <span Class="emphasis">manpage(3)</span> (within the emhpasis foformatting) and in a plain .BR section (often used in the SEE ALSO section). </p>
+<p class="level0"><a name="--hrefdirdir"></a><span class="nroffip">--hrefdir=&lt;dir&gt;</span> </p>
+<p class="level1">Specify a directory to prefix generated href links created with the --mandir option. This defaults to &quot;.&quot;. </p><a name="CSS"></a><h2 class="nroffsh">Css classes</h2>
+<p class="level0"><a name="h2nroffsh"></a><span class="nroffip">h2.nroffsh</span> </p>
+<p class="level1">The nroff &quot;.SH&quot; section. These are normally the &quot;headlines&quot; before each sub section within the man page. </p>
+<p class="level0"><a name="pnroffip"></a><span class="nroffip">p.nroffip</span> </p>
+<p class="level1">The nroff &quot;.IP&quot; section. These are normally the bullet kind used to list each option out of several in a list. Usually followed by a <a class="emphasis" href="#plevel0">p.level0</a> containining the descriptive text. </p>
+<p class="level0"><a name="plevel0"></a><span class="nroffip">p.level0</span> </p>
+<p class="level1">Normal text at the first level. Normally not indented. </p>
+<p class="level0"><a name="plevel1"></a><span class="nroffip">p.level1</span> </p>
+<p class="level1">Text at next logical indent level. Normally indented one level right. </p>
+<p class="level0"><a name="plevel2"></a><span class="nroffip">p.level2</span> </p>
+<p class="level1">Text at the second logical indent level. Normally indented two levels right. </p>
+<p class="level0"><a name="spanbold"></a><span class="nroffip">span.bold</span> </p>
+<p class="level1">Text marked to be bold. </p>
+<p class="level0"><a name="spanmanpage"></a><span class="nroffip">span.manpage</span> </p>
+<p class="level1">Text marked as a reference to another man page. </p>
+<p class="level0"><a name="spanemphasis"></a><span class="nroffip">span.emphasis</span> </p>
+<p class="level1">Text marked to be emphasized. </p>
+<p class="level0"><a name="proffit"></a><span class="nroffip">p.roffit</span> </p>
+<p class="level1">Used for the advertising final paragraph. </p><a name="WWW"></a><h2 class="nroffsh">Www</h2>
+<p class="level0"><a href="http://daniel.haxx.se/projects/roffit">http://daniel.haxx.se/projects/roffit</a> </p><p class="roffit">
  This HTML page was made with <a href="http://daniel.haxx.se/projects/roffit/">roffit</a>.
