@@ -22,7 +22,7 @@
 
 * (March 15, 2005)
 - Added comments about .nf and .fi based on
-  http://www.rfc-editor.org/nroff.html
+  https://web.archive.org/web/20150905054410/www.rfc-editor.org/nroff.html
 
 * (June 21, 2004)
 - make .fi properly end a .nf section
