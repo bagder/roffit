@@ -639,7 +639,7 @@ else {
 print $OutFH @conv;
 print $OutFH <<ROFFIT
 <p class="roffit">
- This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.
+ This HTML page was made with <a href="https://daniel.haxx.se/projects/roffit/">roffit</a>.</p>
 ROFFIT
     ;
 
