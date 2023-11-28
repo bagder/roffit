@@ -26,6 +26,7 @@ my $version = "0.15";
 use strict;
 #use warnings;
 use HTML::Entities qw(encode_entities);
+use File::Basename;
 sub do_encode($) {
     return encode_entities(shift, q{<>&"'#});
 }
@@ -522,7 +523,22 @@ sub parsefile {
             elsif($keyword =~ /^so$/i) {
                 # This keyword refers to a different man page, named in the
                 # $rest.
-                # We don't support this
+                # Recurse and read that instead if possible, otherwise output
+                # generic message saying where to find the information.
+                if ($mandir) {
+                    for my $d (@mandirs) {
+                        my $sofilename = $d . "/" . basename($rest);
+                        if (-r $sofilename) {
+                            # Recurse!
+                            close($InFH);
+                            open($InFH, "<".$sofilename);
+                            parsefile($sofilename);
+                            return;
+                        }
+                    }
+                }
+
+                # If we're here, we didn't recurse.
                 push @out, "See the $rest man page.\n";
             }
 	    elsif($keyword eq "br") {
