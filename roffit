@@ -502,6 +502,7 @@ sub parsefile {
                 $within_tp=0;
                 showp(@p);
                 @p="";
+                $indentlevel-- if ($indentlevel);
             }
             elsif($keyword =~ /^fi$/i) {
                 # .fi = fill-in, extra space will be ignored and text that is
