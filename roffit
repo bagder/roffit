@@ -21,7 +21,7 @@
 #
 # Web:     https://daniel.haxx.se/projects/roffit
 
-my $version = "0.15";
+my $version = "0.16";
 
 use strict;
 #use warnings;
