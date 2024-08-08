@@ -10,7 +10,7 @@ A command line tool that reads nroff and outputs HTML
 
 ## Code
 
- git clone git://github.com/bagder/roffit.git
+ git clone https://github.com/bagder/roffit.git
 
 ## Contributors
 
