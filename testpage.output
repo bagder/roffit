@@ -15,7 +15,7 @@
 <p class="level1">Cool option. See <a class="emphasis" href="#--mumbo">--mumbo</a>. Word in italic. </p>
 <p class="level0"><a name="--mandirdir"></a><span class="nroffip">--mandir=&lt;dir&gt;</span> </p>
 <p class="level1">Set a directory in which <span Class="emphasis">roffit</span> will check for other man pages (in nroff [name].[num] format) that this one refers to. If found, a &lt;a href&gt; link will be made to that page with a html extension instead of the number. The file name in the generated link will be prefixed by the dir given with <span Class="emphasis">--hrefdir</span>. </p>
-<p class="level1">This works for references specified as <span Class="emphasis">manpage(3)</span> (within the emhpasis foformatting) and in a plain .BR section (often used in the SEE ALSO section). </p>
+<p class="level1">This works for references specified as <span Class="emphasis">manpage(3)</span> (within the emhpasis foformatting) and in a plain .BR section (often used in the SEE ALSO section). <br>&bull; one &bull; two &bull; three </p>
 <p class="level0"><a name="--hrefdirdir"></a><span class="nroffip">--hrefdir=&lt;dir&gt;</span> </p>
 <p class="level1">Specify a directory to prefix generated href links created with the --mandir option. This defaults to &quot;.&quot;. </p><a name="CSS"></a><h2 class="nroffsh">Css classes</h2>
 <p class="level0"><a name="h2nroffsh"></a><span class="nroffip">h2.nroffsh</span> </p>
