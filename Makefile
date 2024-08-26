@@ -16,12 +16,15 @@
 #
 ##########################################################################
 # default installation directory
-INSTALLDIR=/usr/local/bin
+PREFIX=/usr/local
+BINDIR=$(PREFIX)/bin
+MANDIR=$(PREFIX)/man
 
 all:
 
 install:
-	cp roffit $(DESTDIR)$(INSTALLDIR)
+	install -Dm0755 roffit $(DESTDIR)$(BINDIR)/roffit
+	install -Dm0644 roffit.1 $(DESTDIR)$(MANDIR)/man1/roffit.1
 
 test:
 	@perl roffit --bare < testpage.1 > testpage.dump
