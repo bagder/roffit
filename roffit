@@ -21,7 +21,7 @@
 #
 # Web:     https://daniel.haxx.se/projects/roffit
 
-my $version = "0.16";
+my $version = "0.17";
 
 use strict;
 #use warnings;
@@ -468,15 +468,19 @@ sub parsefile {
                 showp(@p);
                 @p="";
 
-                my $name= text2name($rest);
-                $anchor{$name}=1;
-
+                # there might be a comma separated list of items
+                my @comma = split(/,/, $rest);
+                for my $r (@comma) {
+                    my $name= text2name($r);
+                    $anchor{$name}=1;
+                    push @p, "<a name=\"$name\"></a>";
+                }
                 $rest =~ s/\"//g; # cut off quotes
 		$rest =~ s/\\f[IBPR]//g; # Un-format it (Use CSS on nroffip class instead)
                 $rest = do_encode($rest);
                 
                 $indentlevel-- if ($indentlevel);
-                push @p, "<a name=\"$name\"></a><span class=\"nroffip\">$rest</span> ";
+                push @p, "<span class=\"nroffip\">$rest</span> ";
                 # make this a single-line title
                 showp(@p);
                 @p="";
