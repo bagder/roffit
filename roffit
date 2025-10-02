@@ -257,7 +257,6 @@ sub linkfile {
                                     # there is such a HTML file present, produce a
                                     # link to it!
                                     $link = "<a Class=\"$style\" href=\"$html\">$symbol</a>";
-                                    $found = 1;
                                     last; # skip out of loop
                                 }
                             }
