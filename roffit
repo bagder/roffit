@@ -64,7 +64,7 @@ while($ARGV[0]) {
     }
     elsif($ARGV[0] eq "--preserve-case") {
         $leavecase = 1;
-        exit;
+        shift @ARGV;
     }
     elsif($ARGV[0] =~ /^--man=([^=]*)=(.*)/) {
         # check for other man pages in the given dir, and if so, link to it
